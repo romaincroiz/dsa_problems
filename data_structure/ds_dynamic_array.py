@@ -102,28 +102,3 @@ class DsDynamicArray:
 
     def __str__(self):
         return f'inner array: {self.__inner_array}, size: {self.__size}, memory: {self.__memory}'
-
-def test_array():
-    dyn_array = DsDynamicArray()
-    dyn_array.append(1)
-    print(dyn_array)
-
-    dyn_array.append(2)
-    print(dyn_array)
-
-    dyn_array.append(3)
-    print(dyn_array)
-
-    print(f'inserting 4 at pos 1...')
-    dyn_array.insert(1, 4)
-    print(dyn_array)
-
-    print(f'removing {dyn_array.remove(3)}...')
-    print(dyn_array)
-
-    print(f'removing {dyn_array.remove(1)}...')
-    print(dyn_array)
-
-    print(f'clearing...')
-    dyn_array.clear()
-    print(dyn_array)

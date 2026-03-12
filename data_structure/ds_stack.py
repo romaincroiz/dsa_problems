@@ -41,33 +41,3 @@ class DsStack:
             current_node = current_node.next
         s += ']'
         return s
-
-def test_stack():
-    s = DsStack()
-
-    s.push("apple")
-    print(s) # [apple]
-    print('head:', s.peak()) # ->apple
-
-    s.push("orange")
-    print(s) # [->orange->apple]
-    print('head:', s.peak())  # orange
-
-    s.push("strawberry")
-    print(s) # # [->strawberry->orange->apple]
-
-    print(f'pop {s.pop()}') # strawberry
-    print(s) # [->orange->apple]
-
-    print(f'pop {s.pop()}')  # orange
-    print(s)  # [->apple]
-
-    s.push("pineapple")
-    print(s) # [->pineapple->apple]
-
-    print('isEmpty ?:', s.is_empty())  # False
-    s.clear()
-    print('isEmpty ?:', s.is_empty())  # True
-    print(s) # []
-
-test_stack()
