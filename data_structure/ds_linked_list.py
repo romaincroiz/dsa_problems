@@ -1,11 +1,5 @@
-class Node:
+from data_structure.common.node import Node
 
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-    def __str__(self):
-        return str(self.data)
 
 class DsLinkedList:
     __head = None
