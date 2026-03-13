@@ -10,6 +10,11 @@ Data Structure, Algorithms and Problem-Solving repository
 ```bash
 # 1. Clone repository
 git clone git clone git@github.com:romaincroiz/dsa_problems.git
+# 2. Create a virtual environment and import packages
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+
 ```
 
 ## What is this?
