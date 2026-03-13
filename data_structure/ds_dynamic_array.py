@@ -1,22 +1,32 @@
+from typing import TypeVar, Generic
+
 MIN_MEMORY = 2
 
-def static_array(length=MIN_MEMORY):
+
+def static_array(length: int = MIN_MEMORY):
     """ Helper function for static array. """
     if length < MIN_MEMORY:
         length = MIN_MEMORY
     return [None] * length
 
-# As python already handles arrays dynamically,
-# we 'emulate' static arrays by handling
-# the 'memory' and 'size' of the array
-class DsDynamicArray:
 
-    __default_memory = MIN_MEMORY
+T = TypeVar('T')
+
+
+class DsDynamicArray(Generic[T]):
+    """ Dynamic array class
+
+    As python already handles arrays dynamically,
+    we 'emulate' static arrays by handling
+    the 'memory' and 'size' of the array
+    Minimum allocated memory is MIN_MEMORY
+    """
+    __default_memory: int = MIN_MEMORY
     __memory = 0
     __inner_array = []
     __size = 0
 
-    def __init__(self, length=MIN_MEMORY):
+    def __init__(self, length: int = MIN_MEMORY):
         self.__default_memory = length
         self.__initialize()
 
@@ -29,32 +39,35 @@ class DsDynamicArray:
     def clear(self):
         self.__initialize()
 
-    def get(self, index):
-        self.__check_in_range(index)
+    def get(self, index: int) -> T:
+        self.__check_element_in_range(index)
         return self.__inner_array[index]
 
-    def __check_in_range(self, index):
-        if index < 0 or index >= self.__size:
-            raise Exception('index out of range')
+    def __check_element_in_range(self, index: int):
+        if index < 0 or index > self.__size -1:
+            raise IndexError
 
     def __len__(self):
         return self.__size
 
-    def append(self, element):
-        """ Add element to the end of the array. """
+    def append(self, element: T | None):
         self.insert(self.__size, element)
 
-    def insert(self, index, element):
-        """ Add element to the end of the array. """
+    def insert(self, index: int, element: T | None):
+        self.__check_insert_in_range(index)
         self.__reallocate_memory()
         self.__increment_size()
         self.__inner_array.insert(index, element)
 
-    def remove(self, index):
-        self.__check_in_range(index)
+    def __check_insert_in_range(self, index: int):
+        if index < 0 or index > self.__size:
+            raise IndexError
+
+    def remove(self, index: int) -> T:
+        self.__check_element_in_range(index)
         return self.__remove_at(index)
 
-    def __remove_at(self, index):
+    def __remove_at(self, index: int) -> T:
         element = self.__inner_array.pop(index)
         self.__decrement_size()
         self.__reallocate_memory()
@@ -77,12 +90,12 @@ class DsDynamicArray:
     def __no_available_memory(self) -> bool:
         return self.__size >= self.__memory
 
-    def __is_shrinkable(self) -> bool:
-        return self.__size < self.__memory // 2
-
     def __expand_memory(self):
         self.__update_memory(self.__memory * 2)
         self._reallocate_array()
+
+    def __is_shrinkable(self) -> bool:
+        return self.__size < self.__memory // 2
 
     def __shrink_memory(self):
         self.__update_memory(self.__memory // 2)
@@ -101,4 +114,10 @@ class DsDynamicArray:
         self.__inner_array = new_array
 
     def __str__(self):
-        return f'inner array: {self.__inner_array}, size: {self.__size}, memory: {self.__memory}'
+        s = '['
+        for i in range (0, self.__size):
+            if i != 0:
+                s += ", "
+            s += self.__inner_array[i].__str__()
+        s += ']'
+        return s
