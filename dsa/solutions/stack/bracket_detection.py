@@ -10,6 +10,8 @@ OPEN_TO_CLOSE_MAP = {
 def check_bracket(s) -> bool:
     """ Checks a given string to ensure each bracket pair is correctly formed
 
+    LeetCode: https://leetcode.com/problems/valid-parentheses
+
      - Handled brackets: [],{},()
 
      - Any other input characters is ignored
@@ -39,32 +41,4 @@ def check_bracket_with_stack(stack, bracket):
         stack.push(OPEN_TO_CLOSE_MAP[bracket])
         return True
     # pop the stack and check if it is the expected bracket
-    return not stack.is_empty() and bracket == stack.pop().data
-
-def test_problem():
-    print('==== TEST MATCHING BRACKETS ====')
-
-    print('--- VALID ---')
-    test_bracket_sequence()
-    test_bracket_sequence("{}")
-    test_bracket_sequence("hello")
-    test_bracket_sequence("(world)")
-    test_bracket_sequence("{}[]()")
-    test_bracket_sequence("{} [{}] ()")
-    test_bracket_sequence("  [ ]")
-    test_bracket_sequence("[({})]")
-    test_bracket_sequence("[sometext]")
-    test_bracket_sequence("[hello([{}])]")
-    test_bracket_sequence("[hello(w[o{r}l]d)]")
-    test_bracket_sequence("[([{}])]{}[]()")
-
-    print('--- INVALID ---')
-    test_bracket_sequence(")")
-    test_bracket_sequence("{")
-    test_bracket_sequence(" ({)}")
-
-def test_bracket_sequence(s=None):
-    print(f"'{s}' : {check_bracket(s)}")
-
-if __name__ == '__main__':
-    test_problem()
+    return not stack.is_empty() and bracket == stack.pop()
