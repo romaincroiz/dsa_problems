@@ -56,8 +56,8 @@ for each elt in nums:
             return [elt, elt2]
 return
 
-### Naive solution: Brute force O(n)
+### Optimized solution: Brute force O(n)
 
 - one loop, store elt + index in hashmap as they are visited
-- for each elt, check if target - elt is in the map -> return the indexes
+- for each elt, check if target - elt is in the map → return the indexes
 - Time complexity is O(n) because each value is visited at most once

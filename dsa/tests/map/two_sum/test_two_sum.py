@@ -1,4 +1,4 @@
-from dsa.solutions.map.two_sums import two_sum
+from dsa.solutions.map.two_sum.two_sum import two_sum
 
 
 class TestTwoSums:
