@@ -1,3 +1,10 @@
+def two_sum_brute(nums: list[int], target: int) -> list[int] | None:
+    for i, numsi in enumerate(nums):
+        for j, numsj in enumerate(nums):
+            if i != j and target - numsi == numsj:
+                return [i, j]
+    return None
+
 def two_sum(nums: list[int], target: int) -> list[int] | None:
     """
     Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
