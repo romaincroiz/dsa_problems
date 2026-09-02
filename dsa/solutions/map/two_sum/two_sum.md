@@ -45,7 +45,7 @@ To find the sum: for each `elt`, find `elt2` so that all are true:
 - `target - elt = elt2`
 - `elt != elt2`
 
-### Naive solution: Brute force O(n2)
+### Naive solution: Hashmap O(n2)
 
 - 2 loops to find the pair that adds up to target
 - Time complexity is O(n2) because for each elt we have an inner loop (n iteration)
